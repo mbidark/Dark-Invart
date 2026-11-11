@@ -1,0 +1,17 @@
+{
+  "name": "MBI Dark · Image Lab",
+  "short_name": "MBI Dark",
+  "description": "Professional browser-based image inverter and editor.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23111111'/%3E%3Cpath d='M12 2a10 10 0 0 1 0 20V2z' fill='%23ffffff'/%3E%3Ccircle cx='12' cy='12' r='3' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
