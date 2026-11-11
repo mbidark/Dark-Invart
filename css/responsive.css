@@ -1,0 +1,55 @@
+@media (max-width: 1024px) {
+  .main { padding: 0 24px 36px; }
+  .topbar { margin: 0 -24px; padding: 0 24px; }
+  .editor-panel { width: 240px; }
+}
+
+@media (max-width: 768px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { transform: translateX(-100%); width: 260px; box-shadow: var(--shadow-lg); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; padding: 0 18px 32px; }
+  .topbar { margin: 0 -18px; padding: 0 18px; }
+  .menu-toggle { display: grid; }
+  .hero-decoration { display: none; }
+  .hero { padding: 24px 0 20px; }
+  .hero h1 { font-size: clamp(28px, 8vw, 38px); }
+  .toolbar { align-items: flex-start; }
+  .actions { width: 100%; }
+  .actions .btn { flex: 1; justify-content: center; }
+  .gallery.list-layout .card { flex-direction: column; }
+  .gallery.list-layout .card-head { border-right: 0; border-bottom: 1px solid var(--line); }
+  .gallery.list-layout .preview { flex: none; }
+  .gallery.list-layout .preview img { height: 140px; }
+  .gallery.list-layout .preview-label { display: flex; }
+  .gallery.list-layout .card-foot { border-left: 0; border-top: 1px solid var(--line); }
+  .editor-body { flex-direction: column-reverse; }
+  .editor-panel { width: 100%; max-height: 45vh; border-right: 0; border-top: 1px solid var(--line); }
+  .editor-stage { padding: 12px; }
+  .editor-tab { flex-direction: row; gap: 6px; }
+  .lightbox-stage { padding: 60px 12px 100px; }
+  .gallery-toolbar-left { width: 100%; }
+  .search-wrap { flex: 1; min-width: 0; }
+  .bulk-actions { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .breadcrumb { display: none; }
+  .dropzone { min-height: 170px; padding: 24px 16px; }
+  .upload-icon { width: 52px; height: 52px; margin-bottom: 12px; }
+  .upload-icon .icon { width: 24px; height: 24px; }
+  .drop-title { font-size: 14px; }
+  .preview img { height: 140px; }
+  .status-pill { display: none; }
+  .settings-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .select, .input { width: 100%; }
+  .editor-presets { grid-template-columns: 1fr; }
+  .lightbox-toolbar { padding: 12px; }
+  .lightbox-info #lightboxName { max-width: 60vw; }
+  .lightbox-actions { gap: 4px; }
+  .lightbox-actions .icon-btn { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
