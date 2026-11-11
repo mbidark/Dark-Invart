@@ -221,11 +221,40 @@
       return { blob, width, height };
     }
     function downloadBlob(blob, filename) {
+      if (!(blob instanceof Blob) || blob.size === 0) {
+        throw new Error('The file is empty or could not be prepared.');
+      }
+
+      // Legacy Microsoft browsers expose a direct Blob download API.
+      if (navigator.msSaveOrOpenBlob) {
+        navigator.msSaveOrOpenBlob(blob, filename);
+        return;
+      }
+
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1500);
+
+      a.href = url;
+      a.download = filename;
+      a.style.display = 'none';
+      a.setAttribute('aria-label', 'Download ' + filename);
+
+      document.body.appendChild(a);
+
+      try {
+        // A real, attached anchor click is more reliable in desktop Chrome/Edge.
+        a.click();
+      } catch (error) {
+        // Fallback for browsers that do not honor the download attribute.
+        window.open(url, '_blank', 'noopener');
+        throw error;
+      } finally {
+        a.remove();
+
+        // Do not revoke immediately: desktop browsers may still be starting
+        // the download after the click event has returned.
+        window.setTimeout(() => URL.revokeObjectURL(url), 60000);
+      }
     }
     function makeCard(item) {
       const card = document.createElement('article');
@@ -253,7 +282,15 @@
       const foot = document.createElement('div'); foot.className = 'card-foot';
       const download = document.createElement('button'); download.className = 'btn small';
       download.type = 'button'; download.textContent = '↓  Download PNG';
-      download.addEventListener('click', () => downloadBlob(item.blob, item.filename));
+      download.addEventListener('click', () => {
+        try {
+          downloadBlob(item.blob, item.filename);
+          toast('PNG download started. Check the Downloads folder.');
+        } catch (error) {
+          console.error('PNG download failed:', error);
+          toast('Download failed. Check browser download permissions.');
+        }
+      });
       foot.appendChild(download);
       card.append(head, preview, label, foot);
       gallery.appendChild(card);
@@ -311,7 +348,7 @@
         items.forEach(item => zip.file(item.filename, item.blob));
         const blob = await zip.generateAsync({ type: 'blob' });
         downloadBlob(blob, 'mbi-dark-inverted-images.zip');
-        setStatus('ZIP archive is ready.'); toast('ZIP downloaded.');
+        setStatus('ZIP file sent to your browser. Check the Downloads folder.'); toast('ZIP download started.');
       } catch (error) {
         console.error(error); setStatus('Could not create ZIP archive.'); toast('ZIP creation failed.');
       } finally { updateControls(); }
