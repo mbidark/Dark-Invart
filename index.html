@@ -4,193 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff" id="metaThemeColor">
-  <meta name="description" content="MBI Dark — Professional image inverter. Convert images to inverted PNGs locally in your browser.">
-  <title>MBI Dark · Image Inverter Pro</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="MBI Dark Image Lab — professional browser-based image editor with persistent storage.">
+  <title>MBI Dark · Image Lab</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23111111'/%3E%3Cpath d='M12 2a10 10 0 0 1 0 20V2z' fill='%23ffffff'/%3E%3Ccircle cx='12' cy='12' r='3' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/views.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
-  <!-- ============================================================
-       SVG ICON SPRITE (inline, hidden)
-       ============================================================ -->
+  <!-- Icon sprite -->
   <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <symbol id="icon-upload" viewBox="0 0 24 24">
-      <path d="M12 16V4m0 0L7 9m5-5l5 5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="icon-download" viewBox="0 0 24 24">
-      <path d="M12 4v12m0 0l-5-5m5 5l5-5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="icon-x" viewBox="0 0 24 24">
-      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="icon-zip" viewBox="0 0 24 24">
-      <path d="M4 8h16M4 16h16M8 4v4m8-4v4M8 20v-4m8 4v-4" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-      <rect x="9" y="10" width="6" height="4" rx="1" stroke="currentColor" fill="none" stroke-width="2"/>
-    </symbol>
-    <symbol id="icon-image" viewBox="0 0 24 24">
-      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" fill="none" stroke-width="2"/>
-      <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/>
-      <path d="M21 15l-5-5L5 21" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="icon-invert" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/>
-      <path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/>
-    </symbol>
-    <symbol id="icon-check" viewBox="0 0 24 24">
-      <path d="M20 6L9 17l-5-5" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="icon-alert" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/>
-      <path d="M12 8v5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="12" cy="16.5" r="1" fill="currentColor" stroke="none"/>
-    </symbol>
-    <symbol id="icon-empty" viewBox="0 0 24 24">
-      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" fill="none" stroke-width="1.8"/>
-      <path d="M8 12h8" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="icon-logo" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/>
-      <path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/>
-      <circle cx="12" cy="12" r="3" stroke="currentColor" fill="none" stroke-width="1.5"/>
-    </symbol>
-    <symbol id="icon-moon" viewBox="0 0 24 24">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="icon-sun" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="5" stroke="currentColor" fill="none" stroke-width="2"/>
-      <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="icon-settings" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="3" stroke="currentColor" fill="none" stroke-width="2"/>
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="icon-refresh" viewBox="0 0 24 24">
-      <path d="M23 4v6h-6M1 20v-6h6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="icon-grid" viewBox="0 0 24 24">
-      <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/>
-      <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/>
-      <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/>
-      <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/>
-    </symbol>
-    <symbol id="icon-list" viewBox="0 0 24 24">
-      <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="icon-trash" viewBox="0 0 24 24">
-      <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="icon-folder" viewBox="0 0 24 24">
-      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="icon-info" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/>
-      <path d="M12 16v-4M12 8h.01" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="icon-sliders" viewBox="0 0 24 24">
-      <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5l5 5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12m0 0l-5-5m5 5l5-5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-invert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/><path d="M12 8v5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor" fill="none" stroke-width="1.5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" fill="none" stroke-width="2"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke="currentColor" fill="none" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" fill="none" stroke-width="2"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" fill="none" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-star-fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z" stroke="currentColor" fill="none" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3" stroke="currentColor" fill="none" stroke-width="2"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" stroke="currentColor" fill="none" stroke-width="2"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" stroke="currentColor" fill="none" stroke-width="2"/></symbol>
+    <symbol id="i-spinner" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2" opacity="0.25"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M21 7v6h-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" fill="none" stroke-width="2"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" fill="none" stroke-width="2"/><path d="M21 21l-4.35-4.35M8 11h6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-command" viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-crop" viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/><path d="M18 22V8a2 2 0 0 0-2-2H2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" fill="none" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" stroke-width="2"/><circle cx="8" cy="9" r="1.5" fill="currentColor"/><circle cx="16" cy="9" r="1.5" fill="currentColor"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" fill="none" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="currentColor" fill="none" stroke-width="2"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" stroke="currentColor" fill="none" stroke-width="2"/><rect x="8" y="2" width="8" height="4" rx="1" stroke="currentColor" fill="none" stroke-width="2"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" fill="none" stroke-width="2"/><path d="M12 16v-4M12 8h.01" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/></symbol>
   </svg>
 
-  <!-- ============================================================
-       APP SHELL
-       ============================================================ -->
   <div class="app" id="app">
-
-    <!-- ---------- SIDEBAR ---------- -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <div class="brand">
-          <div class="brand-mark" aria-hidden="true">
-            <svg class="icon"><use href="#icon-logo"/></svg>
-          </div>
+          <div class="brand-mark"><svg class="icon"><use href="#i-logo"/></svg></div>
           <div class="brand-text">
             <span class="brand-name">MBI DARK</span>
-            <span class="brand-sub">IMAGE INVERTER PRO</span>
+            <span class="brand-sub">IMAGE LAB</span>
           </div>
         </div>
       </div>
 
       <nav class="sidebar-nav">
         <button class="nav-item active" data-view="invert" type="button">
-          <svg class="icon"><use href="#icon-invert"/></svg>
-          <span>Invert</span>
+          <svg class="icon"><use href="#i-invert"/></svg><span>Invert</span>
         </button>
         <button class="nav-item" data-view="gallery" type="button">
-          <svg class="icon"><use href="#icon-grid"/></svg>
-          <span>Gallery</span>
+          <svg class="icon"><use href="#i-grid"/></svg><span>Gallery</span>
           <span class="nav-badge" id="galleryBadge">0</span>
         </button>
         <button class="nav-item" data-view="settings" type="button">
-          <svg class="icon"><use href="#icon-settings"/></svg>
-          <span>Settings</span>
+          <svg class="icon"><use href="#i-settings"/></svg><span>Settings</span>
         </button>
       </nav>
 
       <div class="sidebar-stats">
-        <div class="stat-card">
-          <span class="stat-label">Processed</span>
-          <span class="stat-value" id="statProcessed">0</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-label">Batch limit</span>
-          <span class="stat-value">20</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-label">Max size</span>
-          <span class="stat-value">25 MB</span>
-        </div>
+        <div class="stat-card"><span class="stat-label">Saved</span><span class="stat-value" id="statProcessed">0</span></div>
+        <div class="stat-card"><span class="stat-label">Storage</span><span class="stat-value" id="statStorage">0 B</span></div>
+        <div class="stat-card"><span class="stat-label">DB</span><span class="stat-value" id="statDb">—</span></div>
       </div>
 
       <div class="sidebar-footer">
-        <span class="local-tag">
-          <span class="dot"></span>
-          Local processing
-        </span>
-        <span class="version">v2.0.0</span>
+        <span class="local-tag"><span class="dot"></span>IndexedDB</span>
+        <span class="version">v4.0.0</span>
       </div>
     </aside>
 
-    <!-- ---------- MAIN ---------- -->
+    <!-- MAIN -->
     <main class="main" id="main">
-
-      <!-- Top bar -->
       <header class="topbar">
         <div class="topbar-left">
-          <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Toggle sidebar" type="button">
-            <svg class="icon"><use href="#icon-list"/></svg>
-          </button>
+          <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Toggle sidebar" type="button"><svg class="icon"><use href="#i-list"/></svg></button>
           <div class="breadcrumb">
-            <span class="breadcrumb-root">Tools</span>
+            <span class="breadcrumb-root">Lab</span>
             <span class="breadcrumb-sep">/</span>
             <span class="breadcrumb-current" id="breadcrumbCurrent">Invert</span>
           </div>
         </div>
         <div class="topbar-right">
-          <div class="status-pill" id="statusPill">
-            <span class="status-dot"></span>
-            <span id="statusPillText">Ready</span>
-          </div>
-          <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" type="button" title="Theme follows system (click to override)">
-            <svg class="icon" id="themeIcon"><use href="#icon-moon"/></svg>
-          </button>
+          <button class="icon-btn" id="commandBtn" aria-label="Command palette (Ctrl+K)" title="Ctrl+K"><svg class="icon"><use href="#i-command"/></svg></button>
+          <div class="status-pill" id="statusPill"><span class="status-dot"></span><span id="statusPillText">Ready</span></div>
+          <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" type="button"><svg class="icon" id="themeIcon"><use href="#i-moon"/></svg></button>
         </div>
       </header>
 
-      <!-- ========== VIEW: INVERT ========== -->
+      <!-- VIEW: INVERT -->
       <section class="view active" id="view-invert">
-
-        <!-- Hero -->
         <div class="hero">
           <div class="hero-content">
-            <div class="hero-eyebrow">
-              <svg class="icon"><use href="#icon-invert"/></svg>
-              Image utility / 01
-            </div>
+            <div class="hero-eyebrow"><svg class="icon"><use href="#i-invert"/></svg>Image utility / 01</div>
             <h1>Image Inverter<span class="accent-dot">.</span></h1>
-            <p>Turn your images into inverted PNGs in seconds. Everything runs locally in your browser — nothing ever leaves your device.</p>
+            <p>Turn images into inverted PNGs instantly. All processing is local — your files never leave this browser.</p>
           </div>
           <div class="hero-decoration" aria-hidden="true">
             <div class="hero-ring ring-1"></div>
@@ -199,151 +126,245 @@
           </div>
         </div>
 
-        <!-- Dropzone -->
         <section class="dropzone" id="dropZone" role="button" tabindex="0" aria-label="Choose or drop image files">
           <div class="dropzone-inner">
-            <div class="upload-icon" aria-hidden="true">
-              <svg class="icon"><use href="#icon-upload"/></svg>
-            </div>
+            <div class="upload-icon"><svg class="icon"><use href="#i-upload"/></svg></div>
             <div class="drop-title">Drop images here or <span class="accent-text">browse files</span></div>
-            <div class="drop-hint">
-              PNG, JPG, WEBP, GIF and other browser-supported images<br>
-              <strong>Up to 20 images</strong> per batch · max 25 MB each
-            </div>
+            <div class="drop-hint">PNG, JPG, WEBP, GIF · <strong id="dropLimitHint">No hard limit</strong> · max <span id="dropSizeHint">25 MB</span> each</div>
           </div>
         </section>
         <input id="fileInput" type="file" accept="image/*" multiple>
 
-        <!-- Toolbar -->
         <div class="toolbar">
           <div class="toolbar-left">
-            <div class="count" id="count"><strong>0</strong> / 20 images</div>
+            <div class="count" id="count"><strong>0</strong> images saved</div>
             <div class="view-toggle" id="viewToggle" hidden>
-              <button class="view-toggle-btn active" data-layout="grid" type="button" title="Grid view">
-                <svg class="icon"><use href="#icon-grid"/></svg>
-              </button>
-              <button class="view-toggle-btn" data-layout="list" type="button" title="List view">
-                <svg class="icon"><use href="#icon-list"/></svg>
-              </button>
+              <button class="view-toggle-btn active" data-layout="grid" type="button"><svg class="icon"><use href="#i-grid"/></svg></button>
+              <button class="view-toggle-btn" data-layout="list" type="button"><svg class="icon"><use href="#i-list"/></svg></button>
             </div>
           </div>
           <div class="actions">
-            <button class="btn" id="clearBtn" type="button" disabled>
-              <svg class="icon"><use href="#icon-trash"/></svg> Clear all
-            </button>
-            <button class="btn primary" id="zipBtn" type="button" disabled>
-              <svg class="icon"><use href="#icon-download"/></svg> Download ZIP
-            </button>
+            <button class="btn" id="clearBtn" type="button" disabled><svg class="icon"><use href="#i-trash"/></svg> Clear all</button>
+            <button class="btn primary" id="zipBtn" type="button" disabled><svg class="icon"><use href="#i-download"/></svg> Download ZIP</button>
           </div>
         </div>
 
-        <!-- Status -->
-        <div class="statusline" role="status" aria-live="polite">
-          <span id="statusText">Ready when you are.</span>
-          <div class="progress" id="progress"><span id="progressBar"></span></div>
-        </div>
+        <div class="statusline"><span id="statusText">Ready when you are.</span><div class="progress" id="progress"><span id="progressBar"></span></div></div>
 
-        <!-- Gallery -->
         <section class="gallery" id="gallery" aria-label="Converted images">
-          <div class="empty" id="empty">
-            <svg class="icon"><use href="#icon-empty"/></svg>
-            <p>No images added yet.<br>Your inverted images will appear here.</p>
-          </div>
+          <div class="empty" id="empty"><svg class="icon"><use href="#i-image"/></svg><p>No images yet.<br>Drop some images above to get started.</p></div>
         </section>
 
-        <!-- Footer -->
-        <footer class="main-footer">
-          Crafted by <strong>✿ "Mʙɪ Dᴀʀᴋ"</strong> <span aria-hidden="true">·</span> Dark Host
-        </footer>
+        <footer class="main-footer">Crafted by <strong>✿ "Mʙɪ Dᴀʀᴋ"</strong> <span aria-hidden="true">·</span> Dark Host</footer>
       </section>
 
-      <!-- ========== VIEW: GALLERY ========== -->
+      <!-- VIEW: GALLERY -->
       <section class="view" id="view-gallery">
         <div class="view-header">
-          <h2>Gallery</h2>
-          <p>All processed images from this session.</p>
-        </div>
-        <div class="gallery" id="galleryFull">
-          <div class="empty" id="galleryEmpty">
-            <svg class="icon"><use href="#icon-grid"/></svg>
-            <p>Nothing here yet.<br>Switch to Invert and add some images.</p>
+          <div>
+            <h2>Gallery</h2>
+            <p>All saved images. Click any card to edit or preview.</p>
           </div>
+        </div>
+
+        <div class="gallery-toolbar">
+          <div class="gallery-toolbar-left">
+            <div class="search-wrap">
+              <svg class="icon"><use href="#i-search"/></svg>
+              <input type="search" id="searchInput" placeholder="Search by name…" autocomplete="off">
+            </div>
+            <select id="sortSelect" class="select">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="name-asc">Name A–Z</option>
+              <option value="name-desc">Name Z–A</option>
+              <option value="size-desc">Largest first</option>
+              <option value="size-asc">Smallest first</option>
+            </select>
+            <button class="btn ghost" id="favFilterBtn" type="button">
+              <svg class="icon"><use href="#i-star"/></svg> Favorites
+            </button>
+          </div>
+          <div class="gallery-toolbar-right">
+            <button class="btn" id="selectModeBtn" type="button">
+              <svg class="icon"><use href="#i-check"/></svg> Select
+            </button>
+            <div class="bulk-actions" id="bulkActions" hidden>
+              <span class="bulk-count" id="bulkCount">0 selected</span>
+              <button class="btn small" id="bulkFavBtn" type="button"><svg class="icon"><use href="#i-star"/></svg> Favorite</button>
+              <button class="btn small" id="bulkZipBtn" type="button"><svg class="icon"><use href="#i-download"/></svg> ZIP</button>
+              <button class="btn small danger" id="bulkDelBtn" type="button"><svg class="icon"><use href="#i-trash"/></svg> Delete</button>
+              <button class="btn small ghost" id="bulkCancelBtn" type="button">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery" id="galleryFull">
+          <div class="empty" id="galleryEmpty"><svg class="icon"><use href="#i-grid"/></svg><p>Nothing here yet.<br>Switch to Invert and add some images.</p></div>
         </div>
       </section>
 
-      <!-- ========== VIEW: SETTINGS ========== -->
+      <!-- VIEW: SETTINGS -->
       <section class="view" id="view-settings">
-        <div class="view-header">
-          <h2>Settings</h2>
-          <p>Customize your experience.</p>
-        </div>
-
+        <div class="view-header"><div><h2>Settings</h2><p>Customize your experience and manage stored data.</p></div></div>
         <div class="settings-grid">
           <div class="settings-card">
-            <div class="settings-card-head">
-              <svg class="icon"><use href="#icon-moon"/></svg>
-              <h3>Appearance</h3>
+            <div class="settings-card-head"><svg class="icon"><use href="#i-moon"/></svg><h3>Appearance</h3></div>
+            <div class="settings-row">
+              <div><label for="themeSelect">Theme</label><p class="settings-desc">Auto follows system.</p></div>
+              <select id="themeSelect" class="select"><option value="auto">Auto</option><option value="light">Light</option><option value="dark">Dark</option></select>
             </div>
             <div class="settings-row">
-              <div>
-                <label for="themeSelect">Theme</label>
-                <p class="settings-desc">Auto follows your system preference.</p>
-              </div>
-              <select id="themeSelect" class="select">
-                <option value="auto">Auto (system)</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
+              <div><label for="layoutSelect">Gallery layout</label><p class="settings-desc">Grid or list.</p></div>
+              <select id="layoutSelect" class="select"><option value="grid">Grid</option><option value="list">List</option></select>
             </div>
           </div>
 
           <div class="settings-card">
-            <div class="settings-card-head">
-              <svg class="icon"><use href="#icon-sliders"/></svg>
-              <h3>Processing</h3>
+            <div class="settings-card-head"><svg class="icon"><use href="#i-sliders"/></svg><h3>Processing</h3></div>
+            <div class="settings-row">
+              <div><label for="maxFilesInput">Batch limit</label><p class="settings-desc">1–200 per drop.</p></div>
+              <input id="maxFilesInput" class="input" type="number" min="1" max="200" value="20">
             </div>
             <div class="settings-row">
-              <div>
-                <label for="maxFilesInput">Max images per batch</label>
-                <p class="settings-desc">Between 1 and 50.</p>
-              </div>
-              <input id="maxFilesInput" class="input" type="number" min="1" max="50" value="20">
-            </div>
-            <div class="settings-row">
-              <div>
-                <label for="maxSizeInput">Max file size (MB)</label>
-                <p class="settings-desc">Between 1 and 100.</p>
-              </div>
+              <div><label for="maxSizeInput">Max file size (MB)</label><p class="settings-desc">1–100 MB.</p></div>
               <input id="maxSizeInput" class="input" type="number" min="1" max="100" value="25">
             </div>
+            <div class="settings-row">
+              <div><label for="thumbSizeSelect">Thumbnail size</label><p class="settings-desc">Smaller = faster gallery.</p></div>
+              <select id="thumbSizeSelect" class="select"><option value="200">200px</option><option value="300">300px</option><option value="400">400px</option></select>
+            </div>
           </div>
 
           <div class="settings-card">
-            <div class="settings-card-head">
-              <svg class="icon"><use href="#icon-info"/></svg>
-              <h3>About</h3>
+            <div class="settings-card-head"><svg class="icon"><use href="#i-database"/></svg><h3>Storage</h3></div>
+            <div class="settings-row"><div><label>Status</label><p class="settings-desc" id="dbStatusDesc">Checking…</p></div><span class="badge" id="dbStatusBadge">—</span></div>
+            <div class="settings-row"><div><label>Images</label><p class="settings-desc">Total in IndexedDB.</p></div><span class="badge" id="dbCountBadge">0</span></div>
+            <div class="settings-row"><div><label>Size</label><p class="settings-desc">Estimated storage.</p></div><span class="badge" id="dbSizeBadge">0 B</span></div>
+            <div class="settings-row"><div><label>Quota</label><p class="settings-desc">Browser storage usage.</p></div><span class="badge" id="dbQuotaBadge">—</span></div>
+            <div class="settings-row" style="border-top:1px solid var(--line);padding-top:14px">
+              <button class="btn" id="exportDbBtn" type="button" style="width:100%;justify-content:center"><svg class="icon"><use href="#i-download"/></svg> Export all as ZIP</button>
             </div>
-            <p class="settings-desc" style="margin:0 0 10px">
-              MBI Dark Image Inverter Pro — a fully client-side tool. No uploads, no tracking, no server.
-            </p>
-            <p class="settings-desc" style="margin:0">
-              Version 2.0.0 · Built with vanilla JS.
-            </p>
+            <div class="settings-row" style="border-top:1px solid var(--line)">
+              <button class="btn" id="backupBtn" type="button" style="width:100%;justify-content:center"><svg class="icon"><use href="#i-clipboard"/></svg> Backup metadata (JSON)</button>
+            </div>
+            <div class="settings-row" style="border-top:1px solid var(--line)">
+              <button class="btn" id="clearDbBtn" type="button" style="width:100%;justify-content:center;color:var(--danger);border-color:var(--danger)"><svg class="icon"><use href="#i-trash"/></svg> Delete all stored images</button>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-card-head"><svg class="icon"><use href="#i-info"/></svg><h3>About</h3></div>
+            <p class="settings-desc" style="margin:0 0 10px">MBI Dark Image Lab — a fully client-side image editor. Nothing leaves your device.</p>
+            <p class="settings-desc" style="margin:0 0 10px">Images are stored in IndexedDB and persist across refreshes.</p>
+            <p class="settings-desc" style="margin:0">Version 4.0.0 · Vanilla JS · Web Worker powered</p>
           </div>
         </div>
       </section>
-
     </main>
   </div>
 
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <svg class="icon" id="toastIcon"><use href="#icon-check"/></svg>
-    <span id="toastText"></span>
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close icon-btn" id="lightboxClose" aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button>
+      <button class="lightbox-nav prev icon-btn" id="lightboxPrev" aria-label="Previous"><svg class="icon"><use href="#i-arrow-left"/></svg></button>
+      <button class="lightbox-nav next icon-btn" id="lightboxNext" aria-label="Next"><svg class="icon"><use href="#i-arrow-right"/></svg></button>
+      <div class="lightbox-stage" id="lightboxStage">
+        <img id="lightboxImg" alt="">
+        <div class="lightbox-loading" id="lightboxLoading"><svg class="icon spin"><use href="#i-spinner"/></svg></div>
+      </div>
+      <div class="lightbox-toolbar">
+        <div class="lightbox-info"><span id="lightboxName"></span><span id="lightboxDims"></span></div>
+        <div class="lightbox-actions">
+          <button class="icon-btn" id="lightboxZoomOut" aria-label="Zoom out"><svg class="icon"><use href="#i-zoom-out"/></svg></button>
+          <button class="icon-btn" id="lightboxZoomIn" aria-label="Zoom in"><svg class="icon"><use href="#i-zoom-in"/></svg></button>
+          <button class="icon-btn" id="lightboxFav" aria-label="Favorite"><svg class="icon" id="lightboxFavIcon"><use href="#i-star"/></svg></button>
+          <button class="icon-btn" id="lightboxDownload" aria-label="Download"><svg class="icon"><use href="#i-download"/></svg></button>
+          <button class="icon-btn" id="lightboxEdit" aria-label="Edit"><svg class="icon"><use href="#i-edit"/></svg></button>
+          <button class="icon-btn" id="lightboxDelete" aria-label="Delete"><svg class="icon"><use href="#i-trash"/></svg></button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- EDITOR -->
+  <div class="editor" id="editor" hidden aria-modal="true" role="dialog">
+    <div class="editor-backdrop" id="editorBackdrop"></div>
+    <div class="editor-content">
+      <header class="editor-header">
+        <div class="editor-header-left">
+          <button class="icon-btn" id="editorClose" aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button>
+          <span class="editor-title" id="editorTitle">Edit image</span>
+        </div>
+        <div class="editor-header-right">
+          <button class="icon-btn" id="editorUndo" aria-label="Undo" title="Undo"><svg class="icon"><use href="#i-undo"/></svg></button>
+          <button class="icon-btn" id="editorRedo" aria-label="Redo" title="Redo"><svg class="icon"><use href="#i-redo"/></svg></button>
+          <button class="btn primary" id="editorSave" type="button"><svg class="icon"><use href="#i-check"/></svg> Save as new</button>
+        </div>
+      </header>
+      <div class="editor-body">
+        <aside class="editor-panel" id="editorPanel">
+          <div class="editor-tabs">
+            <button class="editor-tab active" data-tab="filters" type="button"><svg class="icon"><use href="#i-filter"/></svg> Filters</button>
+            <button class="editor-tab" data-tab="adjust" type="button"><svg class="icon"><use href="#i-sliders"/></svg> Adjust</button>
+            <button class="editor-tab" data-tab="transform" type="button"><svg class="icon"><use href="#i-crop"/></svg> Transform</button>
+          </div>
+          <div class="editor-tab-body" id="editorTabBody">
+            <!-- Populated by JS -->
+          </div>
+        </aside>
+        <div class="editor-stage" id="editorStage">
+          <canvas id="editorCanvas"></canvas>
+          <div class="editor-loading" id="editorLoading" hidden><svg class="icon spin"><use href="#i-spinner"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMAND PALETTE -->
+  <div class="command-palette" id="commandPalette" hidden aria-modal="true" role="dialog">
+    <div class="command-backdrop" id="commandBackdrop"></div>
+    <div class="command-box">
+      <div class="command-input-wrap">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input type="text" id="commandInput" placeholder="Type a command…" autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="command-list" id="commandList"></div>
+    </div>
+  </div>
+
+  <!-- Global drop overlay -->
+  <div class="global-drop" id="globalDrop" hidden>
+    <div class="global-drop-inner">
+      <svg class="icon"><use href="#i-upload"/></svg>
+      <p>Drop files to add</p>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay" hidden>
+    <div class="loading-spinner"><svg class="icon spin"><use href="#i-spinner"/></svg></div>
+    <div class="loading-text" id="loadingText">Loading…</div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-stack" id="toastStack"></div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="app.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/processor.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/lightbox.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/shortcuts.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
